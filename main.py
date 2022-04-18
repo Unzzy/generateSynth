@@ -8,11 +8,12 @@ print("Вставьте поля из глоссария ИМЯ - ТИП - КО�
 table_arr = [[0] * 3 for _ in range(glossary_row_count)]  # создание пустого массива
 a = [i for i in iter(input, '')]  # чтение параметров таблицы
 
-
 dataset_row_count = 1000
 start_time = time.time()
 primary_keys = pd.read_csv('keys.csv')  # чтение Primary keys из csv файла
-pk_flag = False
+pk_flag = False # флаг показывающий были ли изменения в файле keys.csv 
+format_date = '%Y-%m-%d 00:00:00.000'
+
 list_of_columns_pk = primary_keys.columns
 
 for i in range(glossary_row_count):  # запись параметров в массив
@@ -21,7 +22,6 @@ for i in range(glossary_row_count):  # запись параметров в ма
     else:
         table_arr[i][0], table_arr[i][1] = a[i].split()
 df = pd.DataFrame()
-format_date = '%Y-%m-%d 00:00:00.000'
 for i in range(glossary_row_count):
     name = table_arr[i][0]
     column_name_split = name.split('_')  # разбивка имени поля для определения интервала даты и поиска GID
